@@ -42,7 +42,7 @@ When using Vault in a `dev` environment, you can export the following values:
 
 ```bash
 export VAULT_DEV_LISTEN_ADDRESS=127.0.0.1:8200
-export VAULT_DEV_ROOT_TOKEN_ID="VaultTutorial"
+export VAULT_DEV_ROOT_TOKEN_ID="LearnVault"
 ```
 
 To start the Vault server, execute the following command:
@@ -57,7 +57,7 @@ To communicate with the server, open a new terminal and export the Vault address
 
 ```bash
 export VAULT_ADDR='http://127.0.0.1:8200'
-export VAULT_TOKEN="VaultTutorial"
+export VAULT_TOKEN="LearnVault"
 ```
 
 Next, log in to Vault by running the following command:
@@ -95,10 +95,10 @@ To store a secret, you need to provide the following information:
 3. Key
 4. Secret value
 
-For example, to store the password `VaultIsAmazing` with the key `feel` in the mount location `hello`, execute the following command:
+For example, to store the password `VaultIsSecure` with the key `about` in the mount location `foo`, execute the following command:
 
 ```bash
-vault kv put -mount=secret hello feel=VaultIsAmazing
+vault kv put -mount=secret foo about=VaultIsSecure
 ```
 
 Upon successful write, you will receive output displaying metadata and secret path information.
@@ -108,7 +108,7 @@ Upon successful write, you will receive output displaying metadata and secret pa
 Vault allows you to store multiple secrets. To update the secret we created earlier, run the following command:
 
 ```bash
-vault kv put -mount=secret hello feel=VaultIsAmazing isItAmazing=yes
+vault kv put -mount=secret foo about=VaultIsSecure isItGreat=yes
 ```
 
 Notice that the version for the secret has been incremented to 2.
@@ -118,7 +118,7 @@ Notice that the version for the secret has been incremented to 2.
 Vault provides flexibility in receiving the secret output in various formats. Let's retrieve the secret in JSON format using the following command:
 
 ```bash
-vault kv get -mount=secret -format=json hello | jq -r
+vault kv get -mount=secret -format=json foo | jq -r
 ```
 
 Executing the above command will produce the secret output in JSON format.
@@ -128,13 +128,13 @@ Executing the above command will produce the secret output in JSON format.
 To delete the secret, use the following command:
 
 ```bash
-vault kv delete -mount=secret hello
+vault kv delete -mount=secret foo
 ```
 
 Upon successful deletion, you will receive a confirmation message. Note that you can recover deleted secrets using the `undelete` command.
 
 ```bash
-vault kv undelete -mount=secret -versions=2 hello
+vault kv undelete -mount=secret -versions=2 foo
 ```
 
 In upcoming tutorials, we will continue exploring secret mount paths and additional commands available in Vault.
